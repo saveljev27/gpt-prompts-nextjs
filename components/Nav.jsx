@@ -1,23 +1,23 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { useState, useEffect } from 'react'
-import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 const Nav = () => {
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
-  const [providers, setProviders] = useState(null)
-  const [toggleDropdown, setToggleDropdown] = useState(false)
+  const [providers, setProviders] = useState(null);
+  const [toggleDropdown, setToggleDropdown] = useState(false);
 
   useEffect(() => {
     const setUpProviders = async () => {
-      const response = await getProviders()
-      setProviders(response)
-    }
-    setUpProviders()
-  }, [])
+      const response = await getProviders();
+      setProviders(response);
+    };
+    setUpProviders();
+  }, []);
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -29,14 +29,13 @@ const Nav = () => {
           alt="Promptopia logo"
           className="object-contain"
         />
-        <p className="logo_text">Promptopia</p>
       </Link>
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
         {session?.user ? (
           <div className="flex gap-3 md:gap-5">
-            <Link href="/create-prompt" className="black_btn">
+            <Link href="/create-prompt" className="green_btn">
               Create Post
             </Link>
             <button type="button" onClick={signOut} className="outline_btn">
@@ -60,7 +59,7 @@ const Nav = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className="black_btn"
+                  className="green_btn"
                 >
                   Sign In
                 </button>
@@ -101,10 +100,10 @@ const Nav = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    setToggleDropdown(false)
-                    signOut()
+                    setToggleDropdown(false);
+                    signOut();
                   }}
-                  className="mt-5 w-full black_btn"
+                  className="mt-5 w-full green_btn"
                 >
                   Sign Out
                 </button>
@@ -119,7 +118,7 @@ const Nav = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className="black_btn"
+                  className="green_btn"
                 >
                   Sign In
                 </button>
@@ -128,7 +127,7 @@ const Nav = () => {
         )}
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

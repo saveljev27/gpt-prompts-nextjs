@@ -1,32 +1,26 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 
-import Profile from '@components/profile'
+import Profile from '@components/profile';
 
 const UserProfile = ({ params }) => {
-  const searchParams = useSearchParams()
-  const userName = searchParams.get('name')
+  const searchParams = useSearchParams();
+  const userName = searchParams.get('name');
 
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${params?.id}/posts`)
-      const data = await response.json()
-      setPosts(data)
-    }
-    if (params?.id) fetchPosts()
-  }, [params.id])
+      const response = await fetch(`/api/users/${params?.id}/posts`);
+      const data = await response.json();
+      setPosts(data);
+    };
+    if (params?.id) fetchPosts();
+  }, [params.id]);
 
-  return (
-    <Profile
-      name={userName}
-      desc="Welcome to your personalized profile page"
-      data={posts}
-    />
-  )
-}
+  return <Profile name={userName} desc="Welcome to guest page" data={posts} />;
+};
 
-export default UserProfile
+export default UserProfile;
