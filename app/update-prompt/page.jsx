@@ -1,43 +1,48 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
-
-import Form from '@components/Form'
+import { Suspense, useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import Form from '@components/Form';
 
 const EditPrompt = () => {
-  const router = useRouter()
+  const router = useRouter();
 
-  const searchParams = useSearchParams()
-  const promptId = searchParams.get('id')
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EditPromptContent router={router} />
+    </Suspense>
+  );
+};
 
-  const [submitting, setSubmitting] = useState(false)
+const EditPromptContent = ({ router }) => {
+  const [searchParams] = useSearchParams();
+  const promptId = searchParams.get('id');
+
+  const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({
     prompt: '',
     tag: '',
-  })
+  });
 
-// Getting
   useEffect(() => {
     const getPromptDetails = async () => {
-      const response = await fetch(`/api/prompt/${promptId}`)
-      const data = await response.json()
-      console.log(data)
+      const response = await fetch(`/api/prompt/${promptId}`);
+      const data = await response.json();
+      console.log(data);
       setPost({
         prompt: data.prompt,
         tag: data.tag,
-      })
-    }
+      });
+    };
 
-    if (promptId) getPromptDetails()
-  }, [promptId])
+    if (promptId) getPromptDetails();
+  }, [promptId]);
 
-// Updating
   const updatePrompt = async (e) => {
-    e.preventDefault()
-    setSubmitting(true)
+    e.preventDefault();
+    setSubmitting(true);
 
-    if (!promptId) return alert('Prompt ID not found')
+    if (!promptId) return alert('Prompt ID not found');
 
     try {
       const response = await fetch(`/api/prompt/${promptId}`, {
@@ -46,17 +51,17 @@ const EditPrompt = () => {
           prompt: post.prompt,
           tag: post.tag,
         }),
-      })
+      });
 
       if (response.ok) {
-        router.push('/')
+        router.push('/');
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setSubmitting(false)
+      setSubmitting(false);
     }
-  }
+  };
 
   return (
     <Form
@@ -66,7 +71,7 @@ const EditPrompt = () => {
       submitting={submitting}
       handleSubmit={updatePrompt}
     />
-  )
-}
+  );
+};
 
-export default EditPrompt
+export default EditPrompt;
