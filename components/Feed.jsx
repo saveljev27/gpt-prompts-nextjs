@@ -25,20 +25,20 @@ const Feed = () => {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
-  const fetchPosts = async () => {
-    try {
-      const response = await fetch('/api/prompt');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      setPosts(data);
-    } catch (error) {
-      console.error('Failed to fetch posts:', error);
-    }
-  };
-
   useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('/api/prompt');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        console.error('Failed to fetch posts:', error);
+      }
+    };
+
     fetchPosts();
   }, []);
 
