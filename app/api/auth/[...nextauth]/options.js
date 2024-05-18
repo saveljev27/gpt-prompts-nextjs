@@ -3,7 +3,7 @@ import { connectToDB } from '@utils/database';
 import User from '@models/user';
 
 export const options = {
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.AUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
@@ -18,7 +18,7 @@ export const options = {
 
       return session;
     },
-    async signIn({ account, profile, user, credentials }) {
+    async signIn({ profile }) {
       try {
         await connectToDB();
 
