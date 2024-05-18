@@ -1,6 +1,8 @@
 import Nav from '@components/Nav';
 import Provider from '@components/Provider';
 import '@styles/globals.css';
+import { getServerSession } from 'next-auth';
+import { options } from './api/auth/[...nextauth]/options';
 
 export const metadata = {
   title: 'ChatGPT Propmpts',
@@ -11,20 +13,19 @@ export const metadata = {
   },
 };
 
-const RootLayout = ({ children }) => {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession(options);
   return (
     <html lang="en">
       <body>
         <Provider>
           <div className="main"></div>
           <main className="app">
-            <Nav />
+            <Nav session={session} />
             {children}
           </main>
         </Provider>
       </body>
     </html>
   );
-};
-
-export default RootLayout;
+}

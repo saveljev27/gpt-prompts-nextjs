@@ -3,20 +3,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
+import { signIn, signOut, getProviders } from 'next-auth/react';
 
-const Nav = () => {
-  const { data: session } = useSession();
-
-  const [providers, setProviders] = useState(null);
+const Nav = ({ session }) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      const res = await getProviders();
-      setProviders(res);
-    })();
-  }, []);
+  const userProfileImage = session?.user?.image || 'images/default.svg';
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -37,12 +28,16 @@ const Nav = () => {
             <Link href="/create-prompt" className="green_btn">
               Create Post
             </Link>
-            <button type="button" onClick={signOut} className="outline_btn">
+            <button
+              type="button"
+              onClick={() => signOut()}
+              className="outline_btn"
+            >
               Sign Out
             </button>
             <Link href="/profile">
               <Image
-                src={session?.user.image}
+                src={userProfileImage}
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -52,19 +47,15 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            {providers &&
-              Object.values(providers).map((provider) => (
-                <button
-                  type="button"
-                  key={provider.name}
-                  onClick={() => {
-                    signIn(provider.id);
-                  }}
-                  className="green_btn"
-                >
-                  Sign in
-                </button>
-              ))}
+            {!session?.user && (
+              <button
+                type="button"
+                onClick={() => signIn('google', { callbackUrl: '/' })}
+                className="green_btn"
+              >
+                Sign in
+              </button>
+            )}
           </>
         )}
       </div>
@@ -74,7 +65,7 @@ const Nav = () => {
         {session?.user ? (
           <div className="flex">
             <Image
-              src={session?.user.image}
+              src={userProfileImage}
               width={37}
               height={37}
               className="rounded-full"
@@ -113,19 +104,15 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            {providers &&
-              Object.values(providers).map((provider) => (
-                <button
-                  type="button"
-                  key={provider.name}
-                  onClick={() => {
-                    signIn(provider.id);
-                  }}
-                  className="black_btn"
-                >
-                  Sign in
-                </button>
-              ))}
+            {!session?.user && (
+              <button
+                type="button"
+                onClick={() => signIn('google', { callbackUrl: '/' })}
+                className="green_btn"
+              >
+                Sign in
+              </button>
+            )}
           </>
         )}
       </div>
