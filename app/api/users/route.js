@@ -17,7 +17,7 @@ export async function PUT(req) {
   return Response.json(true);
 }
 
-export async function GET() {
+export async function GET(req) {
   connectToDB();
   const session = await getServerSession(options);
   const email = session.user.email;
