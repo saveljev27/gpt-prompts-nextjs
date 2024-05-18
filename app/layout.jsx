@@ -13,19 +13,20 @@ export const metadata = {
   },
 };
 
-export default async function RootLayout({ children }) {
-  const session = await getServerSession(options);
+const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body>
         <Provider>
           <div className="main"></div>
           <main className="app">
-            <Nav session={session} />
+            <Nav />
             {children}
           </main>
         </Provider>
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
