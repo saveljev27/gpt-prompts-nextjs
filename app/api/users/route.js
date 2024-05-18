@@ -1,6 +1,7 @@
-import { connectToDB } from '@utils/database';
 import { getServerSession } from 'next-auth';
 import { options } from '../auth/[...nextauth]/options';
+
+import { connectToDB } from '@utils/database';
 import User from '@models/user';
 
 export async function PUT(req) {
