@@ -1,19 +1,11 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import Profile from '@components/Profile';
 
-const UserProfile = () => {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <UserProfileContent />
-    </Suspense>
-  );
-};
-
-const UserProfileContent = ({ params }) => {
+const UserProfile = ({ params }) => {
   const [posts, setPosts] = useState([]);
 
   const searchParams = useSearchParams();

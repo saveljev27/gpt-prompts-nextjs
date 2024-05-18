@@ -1,20 +1,11 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Form from '@components/Form';
 
-const EditPrompt = () => {
+const EditPrompt = ({ router }) => {
   const router = useRouter();
-
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <EditPromptContent router={router} />
-    </Suspense>
-  );
-};
-
-const EditPromptContent = ({ router }) => {
   const [searchParams] = useSearchParams();
   const promptId = searchParams.get('id');
 
