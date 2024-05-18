@@ -6,10 +6,10 @@ import { useSearchParams } from 'next/navigation';
 import Profile from '@components/Profile';
 
 const UserProfile = ({ params }) => {
-  const [posts, setPosts] = useState([]);
-
   const searchParams = useSearchParams();
   const userName = searchParams.get('name');
+
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
