@@ -100,8 +100,6 @@ const Feed = () => {
           data={searchedResults}
           handleTagClick={handleTagClick}
         />
-      ) : !posts.length ? (
-        <Loading />
       ) : (
         <PromptCardList data={posts} handleTagClick={handleTagClick} />
       )}
