@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import Profile from '@components/Profile';
@@ -20,7 +20,11 @@ const UserProfile = ({ params }) => {
     if (params?.id) fetchPosts();
   }, [params.id]);
 
-  return <Profile name={userName} desc="Welcome to guest page" data={posts} />;
+  return (
+    <Suspense fallback={<div>Loading profile...</div>}>
+      <Profile name={userName} desc="Welcome to guest page" data={posts} />
+    </Suspense>
+  );
 };
 
 export default UserProfile;
