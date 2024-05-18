@@ -42,7 +42,6 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
-  // Search Filter
   const filterPrompts = (searchtext) => {
     const regex = new RegExp(searchtext, 'i');
     return posts.filter((post) => {
