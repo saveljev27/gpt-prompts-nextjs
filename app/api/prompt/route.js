@@ -2,12 +2,12 @@ import { connectToDB } from '@utils/database';
 
 import Prompt from '@models/prompt';
 
-export const GET = async (req) => {
+export const dynamic = 'force-dynamic';
+export const GET = async (request) => {
   try {
     await connectToDB();
 
     const prompts = await Prompt.find({}).populate('creator');
-    if (!prompts) return new Response('Prompts not found.', { status: 404 });
 
     return new Response(JSON.stringify(prompts), { status: 200 });
   } catch (error) {
