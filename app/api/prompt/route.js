@@ -2,7 +2,6 @@ import { connectToDB } from '@utils/database';
 
 import Prompt from '@models/prompt';
 
-export const revalidate = 100;
 export const GET = async (request) => {
   try {
     await connectToDB();
@@ -10,9 +9,6 @@ export const GET = async (request) => {
     const prompts = await Prompt.find({}).populate('creator');
     return new Response(JSON.stringify(prompts), {
       status: 200,
-      headers: {
-        'Cache-Control': 'no-store',
-      },
     });
   } catch (error) {
     console.log(error);
