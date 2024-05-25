@@ -1,51 +1,32 @@
 'use client';
-import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Profile from '@components/Profile';
 
-const UserProfile = () => {
-  const [searchParams, setSearchParams] = useState(null);
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+
+import Profile from '@components/profile';
+
+const UserProfile = ({ params }) => {
+  const searchParams = useSearchParams();
+  const userName = searchParams.get('name');
+
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    setSearchParams(useSearchParams());
-  }, []);
-
-  useEffect(() => {
-    if (!searchParams) return;
-
     const fetchPosts = async () => {
-      const response = await fetch(
-        `/api/users/${searchParams.get('id')}/posts`
-      );
+      const response = await fetch(`/api/users/${params?.id}/posts`);
       const data = await response.json();
       setPosts(data);
     };
-
-    if (searchParams.get('id')) {
-      fetchPosts();
-    }
-  }, [searchParams]);
-
-  if (!searchParams) {
-    return <div>Loading parameters...</div>;
-  }
+    if (params?.id) fetchPosts();
+  }, [params.id]);
 
   return (
     <Profile
-      name={searchParams.get('name')}
-      desc="Welcome to guest page"
+      name={userName}
+      desc="Welcome to your personalized profile page"
       data={posts}
     />
   );
 };
 
-const UserPage = () => {
-  return (
-    <Suspense fallback={<div>Loading profile...</div>}>
-      <UserProfile />
-    </Suspense>
-  );
-};
-
-export default UserPage;
+export default UserProfile;
