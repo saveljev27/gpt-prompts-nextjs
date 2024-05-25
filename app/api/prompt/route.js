@@ -2,16 +2,17 @@ import { connectToDB } from '@utils/database';
 
 import Prompt from '@models/prompt';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 100;
 export const GET = async (request) => {
   try {
     await connectToDB();
 
     const prompts = await Prompt.find({}).populate('creator');
-
     return new Response(JSON.stringify(prompts), {
       status: 200,
-      'Cache-Control': 'no-store',
+      headers: {
+        'Cache-Control': 'no-store',
+      },
     });
   } catch (error) {
     console.log(error);
