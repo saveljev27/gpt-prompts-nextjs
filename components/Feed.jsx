@@ -25,22 +25,21 @@ const Feed = () => {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
-  const fetchPosts = async () => {
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = () => {
     try {
-      const response = await fetch('/api/prompt');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      setPosts(data);
+      fetch('/api/prompt').then((response) => {
+        response.json().then((data) => {
+          setPosts(data);
+        });
+      });
     } catch (error) {
       console.error('Failed to fetch posts:', error);
     }
   };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
 
   const filterPrompts = (searchtext) => {
     const regex = new RegExp(searchtext, 'i');
