@@ -1,4 +1,4 @@
-GPT Prompts
+## GPT Prompts
 
 ## About
 
@@ -13,27 +13,42 @@ This project was made to create your own prompts for GPT chat. The project is ma
 
 ## App
 
-Main Screen
+### Main Screen
+
 ![main](/desc/main.png)
 
-#### Profile
+### Profile
+
+- Anyone can visit a user's profile
 
 ![profile](/desc/promptsProfileGif.gif)
 
-#### Prompt create
+### Prompt create
+
+- To create a promt the user must be authorized
 
 ![create](/desc/promptsCreate.gif)
 
-#### Prompt edit
+### Prompt edit/delete
+
+- Only the creator of the promt can edit or delete it
+
+#### Edit
 
 ![edit](/desc/promptsEdit.gif)
 
-#### Prompt delete
+#### Delete
 
 ![delete](/desc/promptsDelete.gif)
 
-#### Prompt search
+### Prompt search
 
 - Search for a prompt, tag or username
 
 ![delete](/desc/promptsSearch.gif)
+
+### Prompt Copy
+
+- To copy a prompt, it is necessary to click the folder icon
+
+![copy](/desc//promptsCopy.gif)
