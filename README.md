@@ -16,5 +16,24 @@ This project was made to create your own prompts for GPT chat. The project is ma
 Main Screen
 ![main](/desc/main.png)
 
-Profile
+#### Profile
+
 ![profile](/desc/promptsProfileGif.gif)
+
+#### Prompt create
+
+![create](/desc/promptsCreate.gif)
+
+#### Prompt edit
+
+![edit](/desc/promptsEdit.gif)
+
+#### Prompt delete
+
+![delete](/desc/promptsDelete.gif)
+
+#### Prompt search
+
+- Search for a prompt, tag or username
+
+![delete](/desc/promptsSearch.gif)

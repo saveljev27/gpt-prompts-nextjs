@@ -38,7 +38,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           />
         </label>
         <div className="flex-end mx-3 mb-5 gap-4">
-          <Link href="/" className="delete_btn">
+          <Link href="/profile" className="delete_btn">
             Cancel
           </Link>
 
