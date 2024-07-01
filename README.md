@@ -2,6 +2,8 @@
 
 ## About
 
+- [Deployed version](https://gpt-prompts-nextjs.vercel.app/)
+
 This project was made to create your own prompts for GPT chat. The project is made using React, Next.js and MongoDB to store the data. The user can sign up using a Google account. Each authorized user has a profile where they can create, update, or delete their own prompt. Unauthorized users can also view the prompts and visit other profiles.
 
 ## Installation
@@ -25,13 +27,13 @@ This project was made to create your own prompts for GPT chat. The project is ma
 
 ### Prompt create
 
-- To create a promt the user must be authorized
+- To create a prompt the user must be authorized
 
 ![create](/desc/promptsCreate.gif)
 
 ### Prompt edit/delete
 
-- Only the creator of the promt can edit or delete it
+- Only the creator of the prompt can edit or delete it
 
 #### Edit
 
@@ -52,3 +54,18 @@ This project was made to create your own prompts for GPT chat. The project is ma
 - To copy a prompt, it is necessary to click the folder icon
 
 ![copy](/desc//promptsCopy.gif)
+
+## Models for DB
+
+### Prompt
+
+- creator: type: Schema.Types.ObjectId, ref: 'User'
+- prompt: type: String, required
+- tag: type: String, required
+
+### User
+
+- email: type: String, required, unique
+- username: type: String, required
+- image: type: String
+- timestamps
