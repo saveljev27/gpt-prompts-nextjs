@@ -6,11 +6,15 @@ This project was made to create your own prompts for GPT chat. The project is ma
 
 ## Installation
 
-• git clone [git@github.com:saveljev27/gpt-prompts-nextjs.git]
-• cd gpt-prompts-nextjs
-• npm install
-• npm run dev
+- git clone [git@github.com:saveljev27/gpt-prompts-nextjs.git]
+- cd gpt-prompts-nextjs
+- npm install
+- npm run dev
 
 ## App
 
-![main](image.png)
+Main Screen
+![main](/desc/main.png)
+
+Profile
+![profile](/desc/promptsProfileGif.gif)
